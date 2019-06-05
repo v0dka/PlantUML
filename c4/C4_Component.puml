@@ -35,7 +35,7 @@ skinparam rectangle<<component_reuse>> {
 		
 }
 
-skinparam rectangle<<component_EXISTINGuse>> {
+skinparam rectangle<<component_existing>> {
     StereotypeFontColor ELEMENT_FONT_COLOR
     FontColor #000000
     BackgroundColor COMPONENT_EXISTING_BG_COLOR
