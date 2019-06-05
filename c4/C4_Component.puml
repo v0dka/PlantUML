@@ -1,7 +1,4 @@
-'!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
 !includeurl https://raw.githubusercontent.com/v0dka/PlantUML/master/c4/C4_Container.puml
-' uncomment the following line and comment the first to use locally
-'!include c:/tmp/c4/C4_Container.puml
 
 ' Scope: A single container.
 ' Primary elements: Components within the container in scope.
@@ -13,7 +10,8 @@
 
 !define COMPONENT_BG_COLOR #85BBF0
 !define COMPONENT_REUSE_BG_COLOR #648CB4
-' //133 187 240 --> 100 140 180
+!define COMPONENT_EXISTING_BG_COLOR #32465A
+
 
 ' Styling
 ' ##################################
@@ -31,6 +29,16 @@ skinparam rectangle<<component_reuse>> {
     StereotypeFontColor ELEMENT_FONT_COLOR
     FontColor #000000
     BackgroundColor COMPONENT_REUSE_BG_COLOR
+    BorderColor #78A8D8
+	RoundCorner 10
+	borderThickness 5
+		
+}
+
+skinparam rectangle<<component_EXISTINGuse>> {
+    StereotypeFontColor ELEMENT_FONT_COLOR
+    FontColor #000000
+    BackgroundColor COMPONENT_EXISTING_BG_COLOR
     BorderColor #78A8D8
 	RoundCorner 10
 	borderThickness 5
@@ -67,6 +75,7 @@ legend right
 |<CONTAINER_BG_COLOR>   | container |
 |<COMPONENT_BG_COLOR>   | component |
 |<COMPONENT_REUSE_BG_COLOR>   | component designed for reuse |
+|<COMPONENT_EXISTING_BG_COLOR>   | existing reused component |
 
 endlegend
 !enddefinelong
@@ -79,6 +88,9 @@ endlegend
 
 !define Component_Reuse(e_alias, e_label, e_techn) rectangle "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//" <<component_reuse>> as e_alias
 !define Component_Reuse(e_alias, e_label, e_techn, e_descr) rectangle "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//\n\n e_descr" <<component_reuse>> as e_alias
+
+!define Component_Existing(e_alias, e_label, e_techn) rectangle "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//" <<component_existing>> as e_alias
+!define Component_Existing(e_alias, e_label, e_techn, e_descr) rectangle "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//\n\n e_descr" <<component_existing>> as e_alias
 
 
 !define ComponentDb(e_alias, e_label, e_techn) database "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//" <<component>> as e_alias
