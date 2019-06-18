@@ -5,7 +5,14 @@
 !define TEMPLATE_STATIC_ARCH_COMPONENT TEMPLATES_BASE_DIR/C4_Component.puml
 !define TEMPLATE_DYNAMIC_ARCH TEMPLATES_BASE_DIR/DynamicArch.puml
 !define TEMPLATE_DATA_FLOW_DIAGRAM TEMPLATES_BASE_DIR/Dfd.puml
-        
+
+!define INCLUDE_DYNAMIC_ARCH !includeurl https://raw.githubusercontent.com/v0dka/PlantUML/master/DynamicArch.puml
+!define INCLUDE_C4_CONTEXT   !includeurl https://raw.githubusercontent.com/v0dka/PlantUML/master/C4_Context.puml
+!define INCLUDE_C4_CONTAINER !includeurl https://raw.githubusercontent.com/v0dka/PlantUML/master/C4_Container.puml
+!define INCLUDE_C4_COMPONENT !includeurl https://raw.githubusercontent.com/v0dka/PlantUML/master/C4_Component.puml
+!define INCLUDE_C4_CLASS     !includeurl https://raw.githubusercontent.com/v0dka/PlantUML/master/C4_Class.puml
+
+
 ' # Colors ##########################################
 
 !define ELEMENT_FONT_COLOR #FFFFFF
