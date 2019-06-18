@@ -1,0 +1,92 @@
+@startuml
+
+!includeurl https://raw.githubusercontent.com/v0dka/PlantUML/master/Common.puml
+!includeurl URL_DYNAMIC_ARCH 
+
+    Boundary(Actors, "Actors") {
+        Actor(MyActorA, "Actor")
+        Actor(MyActorB, "Actor", "Actor Description")
+    }
+
+    Boundary(Queues, "Queues") {
+        Queue(MyQueueA, "My Queue", "Technique")
+        Queue(MyQueueB, "My Queue", "Technique", "Queue description")
+    }
+
+    Boundary(Interfaces, "Interfaces") {
+        Interface(MyInterfaceA, "My Interface", "Function")
+        Interface(MyInterfaceB, "My Interface", "Function", "Description")
+    }
+
+    Lay_D(Actors, Queues)
+    Lay_D(Queues, Interfaces)
+   
+    Boundary(Tasks, "Tasks") {
+        Task(MyTaskA, "Task", "Thread") 
+        Task(MyTaskB, "Task", "Thread", "Task description") 
+        Task_Isr(MyIsrA, "GPIO Interrupt")
+        Task_Isr(MyIsrB, "GPIO Interrupt", "All edges")
+        Task_Timer(MyTimerB, "Scheduler Timer")
+        Task_Timer(MyTimerA, "Scheduler Timer", "Period of 500ms")
+    }
+
+    Boundary(Datas, "Data") {
+        Data(MyDataA, "Data", "Generic")
+        Data(MyDataB, "Data", "Generic", "Database Description")
+
+        Data_RingBuffer(MyDataC, "Data")
+        Data_RingBuffer(MyDataD, "Data",  "Database Description")
+        Data_Pool(MyDataE, "Data")
+        Data_Pool(MyDataF, "Data",  "Database Description")
+        Data_Map(MyDataG, "Data")
+        Data_Map(MyDataH, "Data",  "Database Description")
+        Data_Array(MyDataI, "Data")
+        Data_Array(MyDataJ, "Data",  "Database Description")
+    }
+
+    Boundary(Notifications, "Notifications") {
+        Task(NTsk0, "Task A", "Task")
+        Task(NTsk1, "Task B", "Task")
+        NotifyByEvent_R(NTsk0, NTsk1, "Notify By Event")
+
+        Task(NTsk2, "Task A", "Task")
+        Task(NTsk3, "Task B", "Task")
+        NotifyByFlag_R(NTsk2, NTsk3, "Notify By Flag")
+        
+        Task(NTsk4, "Task A", "Task")
+        Component(NTsk5, "Component")
+        NotifyByCallback_R(NTsk4, NTsk5, "Notify By Callback")
+    }
+
+    Boundary(DataAccesses, "Data Access") {
+        SharedRes(SharedResource, "Data", "Mutex") {
+            Data(MyData, "My Data", "Generic")
+        }
+        Task(DTsk0, "Task A", "Task")
+        Task(DTsk1, "Task B", "Task")
+        Task(DTsk2, "Task C", "Task")
+        Task(DTsk3, "Task D", "Task")
+
+        DataAccess_U(DTsk0, MyData, " ", "Technique")
+        DataAccess_Read_U(DTsk1, MyData, " ")
+        DataAccess_Write_U(DTsk2, MyData, " ")
+        DataAccess_ReadWrite_U(DTsk3, MyData, " ")
+    }
+
+    Boundary(Calls, "Calls") {
+       Task(cTsk0, "Task A", "Task")
+       Interface(cIf0, "Interface", "Function")
+
+       Call_R(cTsk0, cIf0, " ")
+
+       Component(cComp0, "Component A")
+       Component(cComp1, "Component B")
+
+       AsyncCall_R(cComp0, cComp1, "Request")
+       AsyncResponse_L(cComp1, cComp0, "Response")
+    }
+
+    Lay_U(Tasks, Calls)
+    Lay_R(Tasks, DataAccesses)
+    Lay_D(Notifications, Calls)
+@enduml
