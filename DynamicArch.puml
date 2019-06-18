@@ -1,26 +1,18 @@
-!include c:/tmp/c4/SpritesLibs/font-awesome/repeat.puml 
-!include c:/tmp/c4/SpritesLibs/font-awesome/bolt.puml
-!include c:/tmp/c4/SpritesLibs/material/timer.puml
-!include c:/tmp/c4/SpritesLibs/font-awesome/user.puml
-'!include c:/tmp/c4/SpritesLibs/font-awesome/circle_o_notch.puml
-'!include c:/tmp/c4/SpritesLibs/font-awesome-5/spinner.puml
-!include c:/tmp/c4/SpritesLibs/material/data_usage.puml
-
-!include c:/tmp/c4/SpritesLibs/font-awesome/clone.puml
-!include c:/tmp/c4/SpritesLibs/font-awesome/database.puml
-!include c:/tmp/c4/SpritesLibs/font-awesome/cloud.puml
-!include c:/tmp/c4/SpritesLibs/font-awesome/file_o.puml
-'map !include c:/tmp/c4/SpritesLibs/font-awesome/th_list.puml
-'Array !include c:/tmp/c4/SpritesLibs/font-awesome/th.puml
-!include c:/tmp/c4/SpritesLibs/font-awesome-5/list_ol.puml
-!include c:/tmp/c4/SpritesLibs/font-awesome-5/list_ul.puml
-
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome/repeat.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome/bolt.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome/user.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/material/timer.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/material/data_usage.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome/clone.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome/database.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome/cloud.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome/file_o.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome-5/list_ol.puml
+!includeurl https://raw.githubusercontent.com/plantuml/plantuml-stdlib/master/tupadr3/font-awesome-5/list_ul.puml
 
 hide stereotype
 
-
 !define COMPONENT_BG_COLOR #white
-
 
 skinparam rectangle<<task>> {
     FontColor #000000
