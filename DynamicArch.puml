@@ -1,0 +1,214 @@
+!include c:/tmp/c4/SpritesLibs/font-awesome/repeat.puml 
+!include c:/tmp/c4/SpritesLibs/font-awesome/bolt.puml
+!include c:/tmp/c4/SpritesLibs/material/timer.puml
+!include c:/tmp/c4/SpritesLibs/font-awesome/user.puml
+'!include c:/tmp/c4/SpritesLibs/font-awesome/circle_o_notch.puml
+'!include c:/tmp/c4/SpritesLibs/font-awesome-5/spinner.puml
+!include c:/tmp/c4/SpritesLibs/material/data_usage.puml
+
+!include c:/tmp/c4/SpritesLibs/font-awesome/clone.puml
+!include c:/tmp/c4/SpritesLibs/font-awesome/database.puml
+!include c:/tmp/c4/SpritesLibs/font-awesome/cloud.puml
+!include c:/tmp/c4/SpritesLibs/font-awesome/file_o.puml
+'map !include c:/tmp/c4/SpritesLibs/font-awesome/th_list.puml
+'Array !include c:/tmp/c4/SpritesLibs/font-awesome/th.puml
+!include c:/tmp/c4/SpritesLibs/font-awesome-5/list_ol.puml
+!include c:/tmp/c4/SpritesLibs/font-awesome-5/list_ul.puml
+
+
+hide stereotype
+
+
+!define COMPONENT_BG_COLOR #white
+
+
+skinparam rectangle<<task>> {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+    RoundCorner 20
+}
+
+skinparam rectangle<<actor>> {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+}
+
+skinparam database<<data>> {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+}
+
+skinparam rectangle<<Shared Resource>> {
+	FontColor #000000
+	
+	BorderStyle dashed
+	BackgroundColor lightgray
+	roundCorner 15
+}
+
+skinparam component<<component>> {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+}
+
+skinparam queue {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+}
+
+skinparam interface {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+}
+
+
+!define SharedRes(e_alias, e_label, e_techn) rectangle "//<size:TECHN_FONT_SIZE><<Shared Resource>></size>//\n==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//" <<Shared Resource>> as e_alias
+!define SharedRes(e_alias, e_label, e_techn, e_descr) rectangle "//<size:TECHN_FONT_SIZE><<Shared Resource>></size>//\n==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//\n\n e_descr" <<Shared Resource>> as e_alias
+
+
+
+
+
+!define Task_icon(e_icon, e_alias, e_label, e_techn)          rectangle "//<size:TECHN_FONT_SIZE><<task>></size>//\n==e_label\n<$e_icon{scale=0.5}>\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//"  <<task>> as e_alias
+!define Task_icon(e_icon, e_alias, e_label, e_techn, e_descr) rectangle "//<size:TECHN_FONT_SIZE><<task>></size>//\n==e_label\n<$e_icon{scale=0.5}>\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//\n\n----\ne_descr"  <<task>> as e_alias
+!define Task(e_alias, e_label, e_techn) Task_icon(repeat, e_alias, e_label, e_techn) 
+!define Task(e_alias, e_label, e_techn, e_descr) Task_icon(repeat, e_alias, e_label, e_techn, e_descr) 
+!define Task_Isr(e_alias, e_label) Task_icon(bolt, e_alias, e_label, "ISR") 
+!define Task_Isr(e_alias, e_label, e_descr) Task_icon(bolt, e_alias, e_label, "ISR", e_descr) 
+!define Task_Timer(e_alias, e_label) Task_icon(timer, e_alias, e_label, "Timer") 
+!define Task_Timer(e_alias, e_label, e_descr) Task_icon(timer, e_alias, e_label, "Timer", e_descr) 
+
+!define Actor(e_alias, e_label)          rectangle "==e_label\n<$user{scale=0.5}>"  <<actor>> as e_alias
+!define Actor(e_alias, e_label, e_descr) rectangle "==e_label\n<$user{scale=0.5}>\n\n----\ne_descr"  <<actor>> as e_alias
+
+!define Component(e_alias, e_label)          component "==e_label\n<$user{scale=0.5}>"  <<component>> as e_alias
+!define Component(e_alias, e_label, e_descr) component "==e_label\n<$user{scale=0.5}>\n\n----\ne_descr"  <<component>> as e_alias
+
+!define Queue(e_alias, e_label, e_techn)          queue Label(e_label, e_techn)   as e_alias
+!define Queue(e_alias, e_label, e_techn, e_descr) queue Label(e_label, e_techn, e_descr)   as e_alias
+
+!define Interface(e_alias, e_label, e_techn)          interface Label(e_label, e_techn)   as e_alias
+!define Interface(e_alias, e_label, e_techn, e_descr) interface Label(e_label, e_techn, e_descr)   as e_alias
+
+
+!define Data_icon(e_icon, e_alias, e_label, e_techn) 			database "==e_label\n<$e_icon{scale=0.5}>\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//"  <<data>> as e_alias
+!define Data_icon(e_icon, e_alias, e_label, e_techn, e_descr) 	database "==e_label\n<$e_icon{scale=0.5}>\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//\n----\n\ne_descr"  <<data>> as e_alias
+!define Data(e_alias, e_label, e_techn) 						database "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//"  <<data>> as e_alias
+!define Data(e_alias, e_label, e_techn, e_descr) 				database "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//\n----\n\ne_descr"  <<data>> as e_alias
+!define Data_RingBuffer(e_alias, e_label) 						Data_icon(data_usage, e_alias, e_label, "Ring Buffer")
+!define Data_RingBuffer(e_alias, e_label, e_descr) 				Data_icon(data_usage, e_alias, e_label, "Ring Buffer", e_descr)
+!define Data_Pool(e_alias, e_label) 							Data_icon(clone, e_alias, e_label, "Pool")
+!define Data_Pool(e_alias, e_label, e_descr) 					Data_icon(clone, e_alias, e_label, "Pool", e_descr)
+!define Data_Map(e_alias, e_label) 								Data_icon(list_ul, e_alias, e_label, "Map")
+!define Data_Map(e_alias, e_label, e_descr) 					Data_icon(list_ul, e_alias, e_label, "Map", e_descr)
+!define Data_Array(e_alias, e_label) 							Data_icon(list_ol, e_alias, e_label, "Indexed Array")
+!define Data_Array(e_alias, e_label, e_descr) 					Data_icon(list_ol, e_alias, e_label, "Indexed Array", e_descr)
+!define Data_File(e_alias, e_label) 							Data_icon(file_o, e_alias, e_label, "Files Storage")
+!define Data_File(e_alias, e_label, e_descr) 					Data_icon(file_o, e_alias, e_label, "Files Storage", e_descr)
+!define Data_Database(e_alias, e_label, e_techn) 				Data_icon(database, e_alias, e_label, e_techn)
+!define Data_Database(e_alias, e_label, e_techn, e_descr) 		Data_icon(database, e_alias, e_label, e_techn, e_descr)
+!define Data_Cloud(e_alias, e_label, e_techn) 					Data_icon(cloud, e_alias, e_label, e_techn)
+!define Data_Cloud(e_alias, e_label, e_techn, e_descr) 	    	Data_icon(cloud, e_alias, e_label, e_techn, e_descr)
+
+
+!define NotifyByEvent(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "#~~^")
+!define NotifyByEvent(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "#~~^")
+!define NotifyByEvent_L(e_from, e_to, e_label)          Relation(e_from, e_to, e_label,          "#~L~^")
+!define NotifyByEvent_L(e_from, e_to, e_label, e_techn) Relation(e_from, e_to, e_label, e_techn, "#~L~^")
+!define NotifyByEvent_R(e_from, e_to, e_label)          Relation(e_from, e_to, e_label,          "#~R~^")
+!define NotifyByEvent_R(e_from, e_to, e_label, e_techn) Relation(e_from, e_to, e_label, e_techn, "#~R~^")
+!define NotifyByEvent_U(e_from, e_to, e_label)          Relation(e_from, e_to, e_label,          "#~U~^")
+!define NotifyByEvent_U(e_from, e_to, e_label, e_techn) Relation(e_from, e_to, e_label, e_techn, "#~U~^")
+!define NotifyByEvent_D(e_from, e_to, e_label)          Relation(e_from, e_to, e_label,          "#~D~^")
+!define NotifyByEvent_D(e_from, e_to, e_label, e_techn) Relation(e_from, e_to, e_label, e_techn, "#~D~^")
+
+!define NotifyByFlag(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "#..^")
+!define NotifyByFlag(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "#..^")
+!define NotifyByFlag_L(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "#.L.^")
+!define NotifyByFlag_L(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "#.L.^")
+!define NotifyByFlag_R(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "#.R.^")
+!define NotifyByFlag_R(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "#.R.^")
+!define NotifyByFlag_U(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "#.U.^")
+!define NotifyByFlag_U(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "#.U.^")
+!define NotifyByFlag_D(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "#.D.^")
+!define NotifyByFlag_D(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "#.D.^")
+
+!define NotifyByCallback(e_from, e_to, e_label)                Relation(e_from, e_to, e_label,          "#--^")
+!define NotifyByCallback(e_from, e_to, e_label, e_techn)       Relation(e_from, e_to, e_label, e_techn, "#--^")
+!define NotifyByCallback_L(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "#-L-^")
+!define NotifyByCallback_L(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "#-L-^")
+!define NotifyByCallback_R(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "#-R-^")
+!define NotifyByCallback_R(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "#-R-^")
+!define NotifyByCallback_U(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "#-U-^")
+!define NotifyByCallback_U(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "#-U-^")
+!define NotifyByCallback_D(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "#-D-^")
+!define NotifyByCallback_D(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "#-D-^")
+
+!define DataAccess(e_from, e_to, e_label)                Relation(e_from, e_to, e_label,          "~0~>>")
+!define DataAccess(e_from, e_to, e_label, e_techn)       Relation(e_from, e_to, e_label, e_techn, "~0~>>")
+!define DataAccess_L(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "~L0~>>")
+!define DataAccess_L(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "~L0~>>")
+!define DataAccess_R(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "~R0~>>")
+!define DataAccess_R(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "~R0~>>")
+!define DataAccess_U(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "~U0~>>")
+!define DataAccess_U(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "~U0~>>")
+!define DataAccess_D(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "~D0~>>")
+!define DataAccess_D(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "~D0~>>")
+!define DataAccess_Read(e_from, e_to, e_label)    			Relation(e_from, e_to, e_label,"Read","~0~>>")
+!define DataAccess_Read_L(e_from, e_to, e_label)  			Relation(e_from, e_to, e_label,"Read","~L0~>>")
+!define DataAccess_Read_R(e_from, e_to, e_label)  			Relation(e_from, e_to, e_label,"Read","~R0~>>")
+!define DataAccess_Read_U(e_from, e_to, e_label)  			Relation(e_from, e_to, e_label,"Read","~U0~>>")
+!define DataAccess_Read_D(e_from, e_to, e_label)  			Relation(e_from, e_to, e_label,"Read","~D0~>>")
+!define DataAccess_Write(e_from, e_to, e_label)    			Relation(e_from, e_to, e_label,"Write","~0~>>")
+!define DataAccess_Write_L(e_from, e_to, e_label)  			Relation(e_from, e_to, e_label,"Write","~L0~>>")
+!define DataAccess_Write_R(e_from, e_to, e_label)  			Relation(e_from, e_to, e_label,"Write","~R0~>>")
+!define DataAccess_Write_U(e_from, e_to, e_label)  			Relation(e_from, e_to, e_label,"Write","~U0~>>")
+!define DataAccess_Write_D(e_from, e_to, e_label)  			Relation(e_from, e_to, e_label,"Write","~D0~>>")
+!define DataAccess_ReadWrite(e_from, e_to, e_label)    Relation(e_from, e_to, e_label,"Read/Write","~0~>>")
+!define DataAccess_ReadWrite_L(e_from, e_to, e_label)  Relation(e_from, e_to, e_label,"Read/Write","~L0~>>")
+!define DataAccess_ReadWrite_R(e_from, e_to, e_label)  Relation(e_from, e_to, e_label,"Read/Write","~R0~>>")
+!define DataAccess_ReadWrite_U(e_from, e_to, e_label)  Relation(e_from, e_to, e_label,"Read/Write","~U0~>>")
+!define DataAccess_ReadWrite_D(e_from, e_to, e_label)  Relation(e_from, e_to, e_label,"Read/Write","~D0~>>")
+
+
+
+!define Call(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "-->")
+!define Call(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "-->")
+!define Call_L(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "-L->")
+!define Call_L(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "-L->")
+!define Call_R(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "-R->")
+!define Call_R(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "-R->")
+!define Call_U(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "-U->")
+!define Call_U(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "-U->")
+!define Call_D(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "-D->")
+!define Call_D(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "-D->")
+
+!define AsyncCall(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "+-->")
+!define AsyncCall(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "+-->")
+!define AsyncCall_L(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "+-L->")
+!define AsyncCall_L(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "+-L->")
+!define AsyncCall_R(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "+-R->")
+!define AsyncCall_R(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "+-R->")
+!define AsyncCall_U(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "+-U->")
+!define AsyncCall_U(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "+-U->")
+!define AsyncCall_D(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "+-D->")
+!define AsyncCall_D(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "+-D->")
+
+!define AsyncResponse(e_from, e_to, e_label)              Relation(e_from, e_to, e_label,          "+..^")
+!define AsyncResponse(e_from, e_to, e_label, e_techn)     Relation(e_from, e_to, e_label, e_techn, "+..^")
+!define AsyncResponse_L(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "+.L.^")
+!define AsyncResponse_L(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "+.L.^")
+!define AsyncResponse_R(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "+.R.^")
+!define AsyncResponse_R(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "+.R.^")
+!define AsyncResponse_U(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "+.U.^")
+!define AsyncResponse_U(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "+.U.^")
+!define AsyncResponse_D(e_from, e_to, e_label)            Relation(e_from, e_to, e_label,          "+.D.^")
+!define AsyncResponse_D(e_from, e_to, e_label, e_techn)   Relation(e_from, e_to, e_label, e_techn, "+.D.^")
+
+

@@ -1,0 +1,107 @@
+
+skinparam rectangle<<Dataflow_process>> {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+    RoundCorner 20
+}
+
+skinparam rectangle<<Dataflow_user>> {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+    
+}
+
+skinparam database<<Dataflow_storage>> {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLOR
+    BorderColor #78A8D8
+    
+}
+
+skinparam arrowthickness 10
+
+hide stereotype
+
+!definelong DataFlow_Process(e_alias, e_label, e_techn, e_descr) 
+rectangle e_alias <<Dataflow_user>> [
+    ==e_label
+
+    ----
+    //<size:TECHN_FONT_SIZE>[e_techn]</size>// 
+
+    e_descr
+]
+!enddefinelong
+
+
+!definelong DataFlow_Process(e_alias, e_label, e_techn, e_descr) 
+rectangle e_alias <<Dataflow_process>> [
+    ==e_label
+
+    ----
+    //<size:TECHN_FONT_SIZE>[e_techn]</size>// 
+
+    e_descr
+]
+!enddefinelong
+
+
+!definelong DataFlow_Storage(e_alias, e_label, e_techn, e_descr) 
+database e_alias <<Dataflow_storage>> [
+    ==e_label
+
+    ----
+    
+    //<size:TECHN_FONT_SIZE>[e_techn]</size>// 
+
+    e_descr
+]
+!enddefinelong
+
+
+!definelong DataFlow_User(e_alias, e_label, e_techn, e_descr) 
+rectangle e_alias <<Dataflow_user>> [
+    ==e_label
+    //<size:TECHN_FONT_SIZE>[e_techn]</size>// 
+    e_descr
+]
+!enddefinelong
+
+
+
+!define Flow_(e_alias1, e_alias2, e_label, e_direction="") e_alias1 e_direction e_alias2 : "===e_label"
+!define Flow_(e_alias1, e_alias2, e_label, e_techn, e_direction="") e_alias1 e_direction e_alias2 : "===e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//"
+
+!define Flow(e_from,e_to, e_label) Flow_(e_from,e_to, e_label, "-->>")
+!define Flow(e_from,e_to, e_label, e_techn) Flow_(e_from,e_to, e_label, e_techn, "-->>")
+
+!define Flow_Back(e_to, e_from, e_label) Flow_(e_to, e_from, e_label, "<<--")
+!define Flow_Back(e_to, e_from, e_label, e_techn) Flow_(e_to, e_from, e_label, e_techn, "<<--")
+
+!define Flow_Neighbor(e_from,e_to, e_label) Flow_(e_from,e_to, e_label, "->>")
+!define Flow_Neighbor(e_from,e_to, e_label, e_techn) Flow_(e_from,e_to, e_label, e_techn, "->>")
+
+!define Flow_Back_Neighbor(e_to, e_from, e_label) Flow_(e_to, e_from, e_label, "<<-")
+!define Flow_Back_Neighbor(e_to, e_from, e_label, e_techn) Flow_(e_to, e_from, e_label, e_techn, "<<-")
+
+!define Flow_D(e_from,e_to, e_label) Flow_(e_from,e_to, e_label, "-DOWN->>")
+!define Flow_D(e_from,e_to, e_label, e_techn) Flow_(e_from,e_to, e_label, e_techn, "-DOWN->>")
+!define Flow_Down(e_from,e_to, e_label) Flow_D(e_from,e_to, e_label)
+!define Flow_Down(e_from,e_to, e_label, e_techn) Flow_D(e_from,e_to, e_label, e_techn)
+
+!define Flow_U(e_from,e_to, e_label) Flow_(e_from,e_to, e_label, "-UP->>")
+!define Flow_U(e_from,e_to, e_label, e_techn) Flow_(e_from,e_to, e_label, e_techn, "-UP->>")
+!define Flow_Up(e_from,e_to, e_label) Flow_U(e_from,e_to, e_label)
+!define Flow_Up(e_from,e_to, e_label, e_techn) Flow_U(e_from,e_to, e_label, e_techn)
+
+!define Flow_L(e_from,e_to, e_label) Flow_(e_from,e_to, e_label, "-LEFT->>")
+!define Flow_L(e_from,e_to, e_label, e_techn) Flow_(e_from,e_to, e_label, e_techn, "-LEFT->>")
+!define Flow_Left(e_from,e_to, e_label) Flow_L(e_from,e_to, e_label)
+!define Flow_Left(e_from,e_to, e_label, e_techn) Flow_L(e_from,e_to, e_label, e_techn)
+
+!define Flow_R(e_from,e_to, e_label) Flow_(e_from,e_to, e_label, "-RIGHT->>")
+!define Flow_R(e_from,e_to, e_label, e_techn) Flow_(e_from,e_to, e_label, e_techn, "-RIGHT->>")
+!define Flow_Right(e_from,e_to, e_label) Flow_R(e_from,e_to, e_label)
+!define Flow_Right(e_from,e_to, e_label, e_techn) Flow_R(e_from,e_to, e_label, e_techn)

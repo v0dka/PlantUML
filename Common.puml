@@ -1,0 +1,232 @@
+'!define BASE_DIR !includeurl https://raw.githubusercontent.com/v0dka/PlantUML/master/c4/
+!define TEMPLATES_BASE_DIR c:/tmp/c4
+!define TEMPLATE_STATIC_ARCH_CONTEXT TEMPLATES_BASE_DIR/C4_Context.puml
+!define TEMPLATE_STATIC_ARCH_CONTAINER TEMPLATES_BASE_DIR/C4_Container.puml
+!define TEMPLATE_STATIC_ARCH_COMPONENT TEMPLATES_BASE_DIR/C4_Component.puml
+!define TEMPLATE_DYNAMIC_ARCH TEMPLATES_BASE_DIR/DynamicArch.puml
+!define TEMPLATE_DATA_FLOW_DIAGRAM TEMPLATES_BASE_DIR/Dfd.puml
+        
+' # Colors ##########################################
+
+!define ELEMENT_FONT_COLOR #FFFFFF
+
+' # Styles ##########################################
+
+!define TECHN_FONT_SIZE 12
+
+skinparam defaultTextAlignment center
+
+skinparam wrapWidth 200
+skinparam maxMessageSize 150
+
+skinparam rectangle {
+    StereotypeFontSize 12
+    shadowing false
+	
+}
+
+skinparam database {
+    StereotypeFontSize 12
+    shadowing false
+}
+
+skinparam queue {
+   StereotypeFontSize 12
+    shadowing false
+}
+skinparam interface {
+   StereotypeFontSize 12
+    shadowing false
+
+}
+
+skinparam package {
+   StereotypeFontSize 12
+    shadowing false
+
+}
+
+skinparam Arrow {
+    Color #666666
+    FontColor #666666
+    FontSize 12
+}
+
+skinparam rectangle<<boundary>> {
+    Shadowing false
+    StereotypeFontSize 0
+    FontColor #444444
+    BorderColor #444444
+    BorderStyle dashed
+}
+
+
+
+
+
+' # Layout ##########################################
+
+!definelong LAYOUT_AS_SKETCH
+skinparam backgroundColor #EEEBDC
+skinparam handwritten true
+skinparam defaultFontName "Comic Sans MS"
+center footer <font color=red>Warning:</font> Created for discussion, needs to be validated
+!enddefinelong
+
+!define LAYOUT_TOP_DOWN top to bottom direction
+!define LAYOUT_LEFT_RIGHT left to right direction
+
+' # Layout Helpers ##################################
+!define Lay_D(e_from, e_to) e_from -[hidden]D- e_to
+!define Lay_U(e_from, e_to) e_from -[hidden]U- e_to
+!define Lay_R(e_from, e_to) e_from -[hidden]R- e_to
+!define Lay_L(e_from, e_to) e_from -[hidden]L- e_to
+
+' # Boundaries ##################################
+
+!define Boundary(e_alias, e_label) rectangle "===e_label" <<boundary>> as e_alias
+!define Boundary(e_alias, e_label, e_type) rectangle "===e_label\n<size:TECHN_FONT_SIZE>[e_type]</size>" <<boundary>> as e_alias
+
+' # Relationship ##################################
+
+!define Relation(e_alias1, e_alias2, e_label, e_direction="") e_alias1 e_direction e_alias2 : "===e_label"
+!define Relation(e_alias1, e_alias2, e_label, e_techn, e_direction="") e_alias1 e_direction e_alias2 : "===e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//"
+
+!define RelLabel(e_label) "===e_label"
+!define RelLabel(e_label, e_techn) "===e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//"
+
+!define Label(e_label) "==e_label"
+!define Label(e_label, e_techn) "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//"
+!define Label(e_label, e_techn, e_descr) "==e_label\n//<size:TECHN_FONT_SIZE>[e_techn]</size>//\ne_descr"
+
+
+!define Rel(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "-->")
+!define Rel(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "-->")
+
+!define Rel_Back(e_to, e_from, e_label) Relation(e_to, e_from, e_label, "<--")
+!define Rel_Back(e_to, e_from, e_label, e_techn) Relation(e_to, e_from, e_label, e_techn, "<--")
+
+!define Rel_Neighbor(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "->")
+!define Rel_Neighbor(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "->")
+
+!define Rel_Back_Neighbor(e_to, e_from, e_label) Relation(e_to, e_from, e_label, "<-")
+!define Rel_Back_Neighbor(e_to, e_from, e_label, e_techn) Relation(e_to, e_from, e_label, e_techn, "<-")
+
+!define Rel_D(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "-DOWN->")
+!define Rel_D(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "-DOWN->")
+!define Rel_Down(e_from,e_to, e_label) Rel_D(e_from,e_to, e_label)
+!define Rel_Down(e_from,e_to, e_label, e_techn) Rel_D(e_from,e_to, e_label, e_techn)
+
+!define Rel_U(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "-UP->")
+!define Rel_U(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "-UP->")
+!define Rel_Up(e_from,e_to, e_label) Rel_U(e_from,e_to, e_label)
+!define Rel_Up(e_from,e_to, e_label, e_techn) Rel_U(e_from,e_to, e_label, e_techn)
+
+!define Rel_L(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "-LEFT->")
+!define Rel_L(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "-LEFT->")
+!define Rel_Left(e_from,e_to, e_label) Rel_L(e_from,e_to, e_label)
+!define Rel_Left(e_from,e_to, e_label, e_techn) Rel_L(e_from,e_to, e_label, e_techn)
+
+!define Rel_R(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "-RIGHT->")
+!define Rel_R(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "-RIGHT->")
+!define Rel_Right(e_from,e_to, e_label) Rel_R(e_from,e_to, e_label)
+!define Rel_Right(e_from,e_to, e_label, e_techn) Rel_R(e_from,e_to, e_label, e_techn)
+
+
+!define BiDirRel(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<-->")
+!define BiDirRel(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<-->")
+        
+!define BiDirRel_Back(e_to, e_from, e_label) Relation(e_to, e_from, e_label, "<-->")
+!define BiDirRel_Back(e_to, e_from, e_label, e_techn) Relation(e_to, e_from, e_label, e_techn, "<-->")
+        
+!define BiDirRel_Neighbor(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<->")
+!define BiDirRel_Neighbor(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<->")
+        
+!define BiDirRel_Back_Neighbor(e_to, e_from, e_label) Relation(e_to, e_from, e_label, "<->")
+!define BiDirRel_Back_Neighbor(e_to, e_from, e_label, e_techn) Relation(e_to, e_from, e_label, e_techn, "<->")
+        
+!define BiDirRel_D(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<-DOWN->")
+!define BiDirRel_D(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<-DOWN->")
+!define BiDirRel_Down(e_from,e_to, e_label) BiDirRel_D(e_from,e_to, e_label)
+!define BiDirRel_Down(e_from,e_to, e_label, e_techn) BiDirRel_D(e_from,e_to, e_label, e_techn)
+        
+!define BiDirRel_U(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<-UP->")
+!define BiDirRel_U(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<-UP->")
+!define BiDirRel_Up(e_from,e_to, e_label) BiDirRel_U(e_from,e_to, e_label)
+!define BiDirRel_Up(e_from,e_to, e_label, e_techn) BiDirRel_U(e_from,e_to, e_label, e_techn)
+        
+!define BiDirRel_L(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<-LEFT->")
+!define BiDirRel_L(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<-LEFT->")
+!define BiDirRel_Left(e_from,e_to, e_label) BiDirRel_L(e_from,e_to, e_label)
+!define BiDirRel_Left(e_from,e_to, e_label, e_techn) BiDirRel_L(e_from,e_to, e_label, e_techn)
+        
+!define BiDirRel_R(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<-RIGHT->")
+!define BiDirRel_R(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<-RIGHT->")
+!define BiDirRel_Right(e_from,e_to, e_label) BiDirRel_R(e_from,e_to, e_label)
+!define BiDirRel_Right(e_from,e_to, e_label, e_techn) BiDirRel_R(e_from,e_to, e_label, e_techn)
+
+!define Link(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "..>")
+!define Link(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "..>")
+
+!define Link_Back(e_to, e_from, e_label) Relation(e_to, e_from, e_label, "<..")
+!define Link_Back(e_to, e_from, e_label, e_techn) Relation(e_to, e_from, e_label, e_techn, "<..")
+
+!define Link_Neighbor(e_from,e_to, e_label) Relation(e_from,e_to, e_label, ".>")
+!define Link_Neighbor(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, ".>")
+
+!define Link_Back_Neighbor(e_to, e_from, e_label) Relation(e_to, e_from, e_label, "<.")
+!define Link_Back_Neighbor(e_to, e_from, e_label, e_techn) Relation(e_to, e_from, e_label, e_techn, "<.")
+
+!define Link_D(e_from,e_to, e_label) Relation(e_from,e_to, e_label, ".DOWN.>")
+!define Link_D(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, ".DOWN.>")
+!define Link_Down(e_from,e_to, e_label) Link_D(e_from,e_to, e_label)
+!define Link_Down(e_from,e_to, e_label, e_techn) Link_D(e_from,e_to, e_label, e_techn)
+
+!define Link_U(e_from,e_to, e_label) Relation(e_from,e_to, e_label, ".UP.>")
+!define Link_U(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, ".UP.>")
+!define Link_Up(e_from,e_to, e_label) Link_U(e_from,e_to, e_label)
+!define Link_Up(e_from,e_to, e_label, e_techn) Link_U(e_from,e_to, e_label, e_techn)
+
+!define Link_L(e_from,e_to, e_label) Relation(e_from,e_to, e_label, ".LEFT.>")
+!define Link_L(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, ".LEFT.>")
+!define Link_Left(e_from,e_to, e_label) Link_L(e_from,e_to, e_label)
+!define Link_Left(e_from,e_to, e_label, e_techn) Link_L(e_from,e_to, e_label, e_techn)
+
+!define Link_R(e_from,e_to, e_label) Relation(e_from,e_to, e_label, ".RIGHT.>")
+!define Link_R(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, ".RIGHT.>")
+!define Link_Right(e_from,e_to, e_label) Link_R(e_from,e_to, e_label)
+!define Link_Right(e_from,e_to, e_label, e_techn) Link_R(e_from,e_to, e_label, e_techn)
+
+
+!define BiDirLink(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<..>")
+!define BiDirLink(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<..>")
+        
+!define BiDirLink_Back(e_to, e_from, e_label) Relation(e_to, e_from, e_label, "<..>")
+!define BiDirLink_Back(e_to, e_from, e_label, e_techn) Relation(e_to, e_from, e_label, e_techn, "<..>")
+        
+!define BiDirLink_Neighbor(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<.>")
+!define BiDirLink_Neighbor(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<.>")
+        
+!define BiDirLink_Back_Neighbor(e_to, e_from, e_label) Relation(e_to, e_from, e_label, "<.>")
+!define BiDirLink_Back_Neighbor(e_to, e_from, e_label, e_techn) Relation(e_to, e_from, e_label, e_techn, "<.>")
+        
+!define BiDirLink_D(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<.DOWN.>")
+!define BiDirLink_D(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<.DOWN.>")
+!define BiDirLink_Down(e_from,e_to, e_label) BiDirLink_D(e_from,e_to, e_label)
+!define BiDirLink_Down(e_from,e_to, e_label, e_techn) BiDirLink_D(e_from,e_to, e_label, e_techn)
+        
+!define BiDirLink_U(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<.UP.>")
+!define BiDirLink_U(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<.UP.>")
+!define BiDirLink_Up(e_from,e_to, e_label) BiDirLink_U(e_from,e_to, e_label)
+!define BiDirLink_Up(e_from,e_to, e_label, e_techn) BiDirLink_U(e_from,e_to, e_label, e_techn)
+        
+!define BiDirLink_L(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<.LEFT.>")
+!define BiDirLink_L(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<.LEFT.>")
+!define BiDirLink_Left(e_from,e_to, e_label) BiDirLink_L(e_from,e_to, e_label)
+!define BiDirLink_Left(e_from,e_to, e_label, e_techn) BiDirLink_L(e_from,e_to, e_label, e_techn)
+        
+!define BiDirLink_R(e_from,e_to, e_label) Relation(e_from,e_to, e_label, "<.RIGHT.>")
+!define BiDirLink_R(e_from,e_to, e_label, e_techn) Relation(e_from,e_to, e_label, e_techn, "<.RIGHT.>")
+!define BiDirLink_Right(e_from,e_to, e_label) BiDirLink_R(e_from,e_to, e_label)
+!define BiDirLink_Right(e_from,e_to, e_label, e_techn) BiDirLink_R(e_from,e_to, e_label, e_techn)
+
