@@ -1,0 +1,5 @@
+skinparam package {
+    FontColor #000000
+    BackgroundColor COMPONENT_BG_COLORr
+    BorderColor #78A8D8
+} 
