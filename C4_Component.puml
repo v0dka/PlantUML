@@ -65,7 +65,7 @@ skinparam interface<<component>> {
 ' Layout
 ' ##################################
 
-!define LAYOUT_WITH_LEGEND
+!definelong LAYOUT_WITH_LEGEND
 hide stereotype
 legend right
 |=              |= Type |
